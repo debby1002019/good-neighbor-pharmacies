@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>好鄰居藥業聯盟 Good Neighbor Pharmacies</title>
+    <style>
+        /* 基礎設定與品牌配色 */
+        :root {
+            --primary-dark: #006b6b; /* 深孔雀綠 */
+            --primary-light: #8dc63f; /* 萊姆綠 */
+            --text-dark: #333333;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', 'Microsoft JhengHei', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 {
+            color: var(--primary-dark);
+        }
+        
+        /* 導覽列 */
+        header {
+            background-color: white;
+            padding: 15px 50px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; 
+            position: relative;
+            z-index: 10;
+        }
+        header img {
+            height: 55px; 
+            margin-right: 15px;
+        }
+
+        /* 主視覺區 */
+        .hero {
+            padding: 0; 
+            background-color: var(--bg-light); 
+            display: block;
+            width: 100%;
+        }
+        .hero img.banner {
+            width: 100%;
+            height: auto;
+            display: block; 
+        }
+
+        /* 內容區塊共用設定 */
+        .section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+            position: relative;
+            color: var(--primary-dark);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-light);
+            margin: 15px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* 網頁捲動進場動畫特效 */
+        .animate-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .animate-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 引言卡片與螢光筆特效 */
+        .mission-wrapper {
+            background: linear-gradient(180deg, #ffffff 0%, #f4fbf4 100%);
+            border-radius: 15px;
+            padding: 40px 50px;
+            box-shadow: 0 10px 30px rgba(0, 107, 107, 0.08);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(141, 198, 63, 0.2);
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .mission-wrapper::before {
+            content: '“';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 140px;
+            color: rgba(141, 198, 63, 0.15); 
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .mission-text {
+            font-size: 1.25em;
+            line-height: 1.9;
+            color: #444;
+            position: relative;
+            z-index: 1;
+            text-align: justify;
+            margin: 0;
+        }
+        .highlight-marker {
+            background-image: linear-gradient(120deg, rgba(141, 198, 63, 0.4) 0%, rgba(141, 198, 63, 0.4) 100%);
+            background-repeat: no-repeat;
+            background-size: 0% 40%;
+            background-position: 0 85%;
+            transition: background-size 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            font-weight: bold;
+            color: var(--primary-dark);
+            padding: 0 2px;
+        }
+        .is-visible .highlight-marker {
+            background-size: 100% 40%;
+            transition-delay: 0.4s; 
+        }
+
+        /* 核心優勢排版 */
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 25px 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border-left: 6px solid var(--primary-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+        .feature-icon {
+            font-size: 2.5em;
+            margin-right: 30px;
+            flex-shrink: 0;
+            width: 60px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .feature-item:hover .feature-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+        .feature-content {
+            flex-grow: 1;
+        }
+        .feature-content h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .feature-content p {
+            margin: 0;
+            color: #666;
+            font-size: 1.05em;
+        }
+
+        /* ✨ 新增：供應產品範疇徽章排版 */
+        .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .product-badge {
+            background-color: white;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-dark);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .product-badge:hover {
+            background-color: var(--primary-light);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(141, 198, 63, 0.3);
+        }
+
+        /* ✨ 新增：專屬 B2B 訂購與客服服務排版 */
+        .service-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 6px solid var(--primary-dark);
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-card .icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .service-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        .service-card p {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        /* 全台統計區塊排版 */
+        .stats-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .stats-image {
+            flex: 1;
+            text-align: center;
+        }
+        .stats-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            transition: transform 0.5s ease;
+        }
+        .stats-image img:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        .stats-text {
+            flex: 1;
+        }
+        .stats-text h3 {
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+        .counter-number {
+            font-size: 2.2em;
+            font-weight: 900;
+            color: var(--primary-dark);
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .region-highlight {
+            background-color: #e6f2f2;
+            padding: 15px;
+            border-left: 5px solid var(--primary-dark);
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* ✨ 新增：常見問題 (FAQ) 手風琴樣式 */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px 25px;
+            font-size: 1.15em;
+            font-weight: bold;
+            color: var(--primary-dark);
+            background-color: #fcfcfc;
+            border-left: 4px solid var(--primary-light);
+            margin: 0;
+        }
+        .faq-question span {
+            color: var(--primary-light);
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        .faq-answer {
+            padding: 20px 25px;
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.8;
+            border-top: 1px solid #eee;
+            background-color: white;
+        }
+        .faq-answer ul {
+            margin: 10px 0 0 0;
+            padding-left: 20px;
+            list-style-type: none; /* 移除預設的圓點 */
+        }
+        .faq-answer ul li {
+            margin-bottom: 8px;
+        }
+        
+        /* LINE 聯繫區塊 */
+        .line-contact {
+            text-align: center;
+            margin: 40px 0;
+        }
+        @keyframes linePulse {
+            0% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(141, 198, 63, 0.4); }
+            100% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        }
+        .line-pulse-btn img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            animation: linePulse 3s infinite ease-in-out;
+        }
+        
+        /* 頁尾 */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* 響應式 RWD 調整 */
+        @media (max-width: 768px) {
+            .stats-container, .service-container {
+                flex-direction: column;
+                grid-template-columns: 1fr;
+            }
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+            .feature-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            .mission-wrapper {
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="好鄰居藥業聯盟 Logo.jpg" alt="好鄰居藥業聯盟 Logo">
+    </header>
+
+    <section class="hero">
+        <img src="首頁最上方BN.png" alt="您健康的好鄰居！讓我們做您最強大的後盾" class="banner">
+    </section>
+
+    <section class="section animate-scroll">
+        <h2 class="section-title">醫藥聯網，共創共榮</h2>
+        <div class="mission-wrapper">
+            <p class="mission-text">
+                「好鄰居藥業聯盟」不只是傳統的藥局中盤商，幕後更有強大體系支援，更是全台藥師最值得信賴的事業夥伴。<br><br>
+                我們深知獨立藥局在經營上所面臨的挑戰。因此，我們背靠<span class="highlight-marker">敏盛醫療體系的強大資源</span>，將醫院級的專業支援，結合多年的藥局實務經驗，打造出一個<span class="highlight-marker">穩健、高效的醫藥聯網平台</span>。
+            </p>
+        </div>
+    </section>
+
+    <section class="section" style="background-color: var(--bg-light); max-width: 100%;">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 class="section-title animate-scroll">一站式購足．產品供應範疇</h2>
+            <p class="animate-scroll" style="text-align: center; color: #666; font-size: 1.1em;">多元且充足的貨源，滿足您藥局的各種陳列與調劑需求。</p>
+            
+            <div class="products-grid animate-scroll">
+                <div class="product-badge">💊 處方箋用藥</div>
+                <div class="product-badge">🏥 OTC 指示用藥 / 成藥</div>
+                <div class="product-badge">🌿 保健食品 / 營養補充品</div>
+                <div class="product-badge">🩺 醫療器材</div>
+                <div class="product-badge">🧴 家庭衛生</div>
+                <div class="product-badge">🛒 日用品</div>
+                <div class="product-badge">🐾 寵物商品</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 class="section-title animate-scroll">專屬服務流程，營運更省心</h2>
+            
+            <div class="service-container">
+                <div class="service-card animate-scroll">
+                    <span class="icon">💻</span>
+                    <h3>專屬線上訂貨平台</h3>
+                    <p>揮別繁瑣的手工抄單！我們的 B2B 線上系統提供<strong>庫存與效期透明化</strong>資訊，讓您 24 小時隨時隨地皆可輕鬆下單，精準掌握進貨狀況。</p>
+                </div>
+                
+                <div class="service-card animate-scroll">
+                    <span class="icon">📱</span>
+                    <h3>LINE 專屬一對一客服</h3>
+                    <p>無論是帳務查詢、商品疑問，或是需要索取<strong>廣宣素材（如促銷 Banner）</strong>，透過 LINE 就能快速找到專人為您處理，溝通零時差，不用苦等電話語音。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background-color: var(--bg-light); max-width: 100%;">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 class="section-title animate-scroll">我們的核心優勢</h2>
+            <div class="features-list">
+                <div class="feature-item animate-scroll">
+                    <div class="feature-icon">🏥</div>
+                    <div class="feature-content">
+                        <h3>敏盛體系支援</h3>
+                        <p>來自敏盛醫療體系的專業背書，以醫院級的標準嚴格把關，提供專業醫藥新知與營運後援。</p>
+                    </div>
+                </div>
+                <div class="feature-item animate-scroll">
+                    <div class="feature-icon">🤝</div>
+                    <div class="feature-content">
+                        <h3>1300+ 門市串聯</h3>
+                        <p>全台超過 1,300 家門市。透過龐大聯盟網絡整合市場需求，發揮規模經濟優勢。</p>
+                    </div>
+                </div>
+                <div class="feature-item animate-scroll">
+                    <div class="feature-icon">📦</div>
+                    <div class="feature-content">
+                        <h3>穩定貨源供給</h3>
+                        <p>結合強大採購力與完善物流系統，承諾提供穩定、快速且來源優良的藥品與保健品。</p>
+                    </div>
+                </div>
+                <div class="feature-item animate-scroll">
+                    <div class="feature-icon">💊</div>
+                    <div class="feature-content">
+                        <h3>深耕藥局專業</h3>
+                        <p>比誰都了解第一線藥師的需求與痛點，為您提供最貼近市場的選品建議與產品組合。</p>
+                    </div>
+                </div>
+                <div class="feature-item animate-scroll" style="border-left-color: var(--primary-light);">
+                    <div class="feature-icon">🚚</div>
+                    <div class="feature-content">
+                        <h3>自有車隊專車配送</h3>
+                        <p>擁有專屬物流車隊，主要服務北北基桃地區。自有車隊機動性更高，確保醫藥品安全、準時送達您的門市。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats-section" class="section animate-scroll">
+        <h2 class="section-title">在地深耕 · 守護全台</h2>
+        <div class="stats-container">
+            <div class="stats-image">
+                <img src="全台藥局診所家數統計圖.png" alt="全台藥局診所家數統計圖">
+            </div>
+            <div class="stats-text">
+                <h3>全台合作門市突破 <span id="member-counter" class="counter-number">0</span> 家</h3>
+                <p>好鄰居藥業聯盟的服務足跡遍及全台。透過健全的營運網絡，我們將資源精準輸送至每一個需要的角落，成為各地基層醫療最堅實的後援夥伴。</p>
+                <div class="region-highlight">
+                    <strong>📍 北北基桃核心密集優勢</strong><br>
+                    我們在北部地區深耕成效斐然（新北市 220 家、台北市 208 家、桃園市 101 家、基隆市 33 家），搭配我們的<strong>自有專屬物流車隊</strong>，能提供最即時、彈性且高頻率的配送服務，滿足獨立藥局的每日營運調度。
+                </div>
+                <p>不論您身在何處，加入好鄰居，即可共享超過 1,300 家門市規模帶來的強大採購議價力與穩定的體系貨源。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background-color: var(--bg-light); max-width: 100%;">
+        <div class="faq-container">
+            <h2 class="section-title animate-scroll">常見問題 FAQ</h2>
+            
+            <div class="faq-item animate-scroll">
+                <p class="faq-question"><span>Q1.</span> 加入聯盟有門檻及費用嗎？</p>
+                <div class="faq-answer">
+                    <strong>免費加入！</strong><br>
+                    只需提供您的「開業執照」與「管制藥品登記證」等基本審核資料，即可快速開通專屬帳號。
+                </div>
+            </div>
+
+            <div class="faq-item animate-scroll">
+                <p class="faq-question"><span>Q2.</span> 每筆訂單有最低出貨金額限制嗎？</p>
+                <div class="faq-answer">
+                    <ul>
+                        <li><strong>1️⃣ 訂單無最低出貨金額：</strong> 彈性配合您的庫存需求，小額叫貨也沒問題。</li>
+                        <li><strong>2️⃣ 滿額免運：</strong> 單筆訂單滿 <strong>3,000元</strong> 即可享有免運費優惠（常溫與冰品需分開計算）。</li>
+                        <li><strong>3️⃣ 快速到貨：</strong> 早上 10 點前結單，當日出貨，隔天到貨；早上 10 點後結單，隔天出貨，後天到貨。<br>
+                        <span style="font-size: 0.9em; color: #888;">*註：偏遠地區或特殊假期之到貨時間，需依合作物流公司實際安排為準。</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h2 class="section-title animate-scroll">準備好擁有更強大的後盾了嗎？</h2>
+            
+            <div class="line-contact animate-scroll">
+                <p style="font-size: 1.2em; font-weight: bold; color: var(--primary-dark); margin-bottom: 15px;">👇 掃描或點擊下方圖片，立即加入 LINE 官方帳號諮詢 👇</p>
+                <a href="https://line.me/R/ti/p/您的LINEID" target="_blank" class="line-pulse-btn">
+                    <img src="image_c9316e.png" alt="加入好鄰居藥業聯盟 LINE 官方帳號">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 好鄰居藥業聯盟 Good Neighbor Pharmacies 版權所有</p>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2 
+        };
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    if (entry.target.id === 'stats-section') {
+                        runNumberCounter();
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-scroll').forEach(element => {
+            scrollObserver.observe(element);
+        });
+
+        function runNumberCounter() {
+            const counterElement = document.getElementById('member-counter');
+            if(counterElement.getAttribute('data-animated') === 'true') return;
+            counterElement.setAttribute('data-animated', 'true');
+            
+            const targetNumber = 1300;
+            const animationDuration = 1800; 
+            const startTime = performance.now();
+
+            function updateNumber(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                
+                if (elapsedTime < animationDuration) {
+                    const progress = elapsedTime / animationDuration;
+                    const easeProgress = progress * (2 - progress);
+                    const currentCount = Math.floor(easeProgress * targetNumber);
+                    
+                    counterElement.textContent = currentCount.toLocaleString();
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    counterElement.textContent = targetNumber.toLocaleString(); 
+                }
+            }
+            requestAnimationFrame(updateNumber);
+        }
+    </script>
+</body>
+</html>
