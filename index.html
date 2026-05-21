@@ -133,6 +133,70 @@
             transition-delay: 0.4s; 
         }
 
+        /* 供應產品範疇徽章排版 */
+        .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .product-badge {
+            background-color: white;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-dark);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .product-badge:hover {
+            background-color: var(--primary-light);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(141, 198, 63, 0.3);
+        }
+
+        /* 專屬 B2B 訂購與客服服務排版 */
+        .service-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 6px solid var(--primary-dark);
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-card .icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .service-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        .service-card p {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.7;
+            text-align: left;
+        }
+
         /* 核心優勢排版 */
         .features-list {
             display: flex;
@@ -178,100 +242,95 @@
             font-size: 1.05em;
         }
 
-        /* ✨ 新增：供應產品範疇徽章排版 */
-        .products-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        .product-badge {
-            background-color: white;
-            border: 2px solid var(--primary-light);
-            color: var(--primary-dark);
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 1.1em;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        .product-badge:hover {
-            background-color: var(--primary-light);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(141, 198, 63, 0.3);
-        }
-
-        /* ✨ 新增：專屬 B2B 訂購與客服服務排版 */
-        .service-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        .service-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-top: 6px solid var(--primary-dark);
-            transition: transform 0.3s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-        .service-card .icon {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            display: block;
-        }
-        .service-card h3 {
-            font-size: 1.4em;
-            margin-bottom: 15px;
-        }
-        .service-card p {
-            color: #555;
-            font-size: 1.05em;
-            line-height: 1.7;
-            text-align: left;
-        }
-
-        /* 全台統計區塊排版 */
+        /* 高質感地圖連線數據看板排版 */
         .stats-container {
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 40px;
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.07);
         }
-        .stats-image {
-            flex: 1;
-            text-align: center;
+        
+        .image-map-wrapper {
+            flex: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .stats-image img {
-            max-width: 100%;
+        
+        /* 隱形畫框：確保地圖跟標籤完美重合的核心 */
+        .map-inner-container {
+            position: relative; 
+            display: inline-block; 
+            max-width: 480px; 
+            width: 100%;
+        }
+
+        .taiwan-map-img {
+            width: 100%;
             height: auto;
-            border-radius: 5px;
-            transition: transform 0.5s ease;
+            display: block;
         }
-        .stats-image img:hover {
-            transform: translateY(-5px) scale(1.02);
+
+        /* 拉線出去後的數據標籤樣式 */
+        .map-pin {
+            position: absolute;
+            transform: translate(-50%, -50%); 
+            background: white;
+            border: 1px solid var(--primary-dark);
+            border-radius: 6px;
+            padding: 4px 8px;
+            box-shadow: 0 2px 8px rgba(0, 107, 107, 0.12);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 5;
+            transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            /* 🚀 核心修正：將滑鼠事件權限重新開啟，允許穿透上層的透明容器 */
+            pointer-events: auto;
         }
+        
+        /* 懸停時置頂：設定超高 z-index 並放大 */
+        .map-pin:hover {
+            z-index: 999 !important;
+            transform: translate(-50%, -55%) scale(1.15);
+            box-shadow: 0 8px 20px rgba(0, 107, 107, 0.25);
+            border-color: var(--primary-light);
+        }
+        
+        .map-pin .county-name {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .map-pin .county-num {
+            font-size: 14px; 
+            font-weight: 900;
+            color: var(--primary-dark);
+            background-color: #f0fafa;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .unit-text {
+            font-size: 12px;
+            font-weight: normal;
+            margin-left: 2px;
+        }
+
         .stats-text {
             flex: 1;
         }
         .stats-text h3 {
             font-size: 1.5em;
             margin-top: 0;
+            margin-bottom: 20px;
         }
         .counter-number {
             font-size: 2.2em;
@@ -288,7 +347,7 @@
             border-radius: 0 5px 5px 0;
         }
 
-        /* ✨ 新增：常見問題 (FAQ) 手風琴樣式 */
+        /* FAQ 常見問題 */
         .faq-container {
             max-width: 800px;
             margin: 0 auto;
@@ -325,7 +384,7 @@
         .faq-answer ul {
             margin: 10px 0 0 0;
             padding-left: 20px;
-            list-style-type: none; /* 移除預設的圓點 */
+            list-style-type: none; 
         }
         .faq-answer ul li {
             margin-bottom: 8px;
@@ -360,7 +419,7 @@
         /* 響應式 RWD 調整 */
         @media (max-width: 768px) {
             .stats-container, .service-container {
-                flex-direction: column;
+                flex-direction: column; 
                 grid-template-columns: 1fr;
             }
             .feature-item {
@@ -452,8 +511,8 @@
                 <div class="feature-item animate-scroll">
                     <div class="feature-icon">🤝</div>
                     <div class="feature-content">
-                        <h3>1300+ 門市串聯</h3>
-                        <p>全台超過 1,300 家門市。透過龐大聯盟網絡整合市場需求，發揮規模經濟優勢。</p>
+                        <h3>1,307+ 門市串聯</h3>
+                        <p>全台超過 1,307 家門市。透過龐大聯盟網絡整合市場需求，發揮規模經濟優勢。</p>
                     </div>
                 </div>
                 <div class="feature-item animate-scroll">
@@ -484,17 +543,25 @@
     <section id="stats-section" class="section animate-scroll">
         <h2 class="section-title">在地深耕 · 守護全台</h2>
         <div class="stats-container">
-            <div class="stats-image">
-                <img src="全台藥局診所家數統計圖.png" alt="全台藥局診所家數統計圖">
+            
+            <div class="image-map-wrapper">
+                <div class="map-inner-container">
+                    <img src="台灣地圖.png" alt="台灣各縣市藥局分佈地圖" class="taiwan-map-img">
+                    
+                    <svg id="map-svg-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index: 1;"></svg>
+                    
+                    <div id="map-pins-container" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index: 2;"></div>
+                </div>
             </div>
+
             <div class="stats-text">
-                <h3>全台合作門市突破 <span id="member-counter" class="counter-number">0</span> 家</h3>
+                <h3>全台合作門市突破 <span id="member-counter" class="counter-number">1,307</span> 家</h3>
                 <p>好鄰居藥業聯盟的服務足跡遍及全台。透過健全的營運網絡，我們將資源精準輸送至每一個需要的角落，成為各地基層醫療最堅實的後援夥伴。</p>
                 <div class="region-highlight">
                     <strong>📍 北北基桃核心密集優勢</strong><br>
                     我們在北部地區深耕成效斐然（新北市 220 家、台北市 208 家、桃園市 101 家、基隆市 33 家），搭配我們的<strong>自有專屬物流車隊</strong>，能提供最即時、彈性且高頻率的配送服務，滿足獨立藥局的每日營運調度。
                 </div>
-                <p>不論您身在何處，加入好鄰居，即可共享超過 1,300 家門市規模帶來的強大採購議價力與穩定的體系貨源。</p>
+                <p>不論您身在何處，加入好鄰居，即可共享龐大規模帶來的強大採購議價力與穩定的體系貨源。</p>
             </div>
         </div>
     </section>
@@ -517,7 +584,7 @@
                     <ul>
                         <li><strong>1️⃣ 訂單無最低出貨金額：</strong> 彈性配合您的庫存需求，小額叫貨也沒問題。</li>
                         <li><strong>2️⃣ 滿額免運：</strong> 單筆訂單滿 <strong>3,000元</strong> 即可享有免運費優惠（常溫與冰品需分開計算）。</li>
-                        <li><strong>3️⃣ 快速到貨：</strong> 早上 10 點前結單，當日出貨，隔天到貨；早上 10 點後結單，隔天出貨，後天到貨。<br>
+                        <li><strong>3️⃣ 快速到貨：</strong> 早上 10 點前結單，當日出貨，隔天到貨；早上 10 點後結單，隔天出貨，后天到貨。<br>
                         <span style="font-size: 0.9em; color: #888;">*註：偏遠地區或特殊假期之到貨時間，需依合作物流公司實際安排為準。</span></li>
                     </ul>
                 </div>
@@ -544,19 +611,111 @@
     </footer>
 
     <script>
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.2 
+        const pharmacyData = {
+            "基隆市": { count:33, dotX:"82%", dotY:"8%", labelX:"82%", labelY:"2%", anchorX:"72%" },
+            "台北市": { count:208, dotX:"36%", dotY:"9%", labelX:"40%", labelY:"0%", anchorX:"34%" },
+            "新北市": { count:220, dotX:"80%", dotY:"13%", labelX:"100%", labelY:"10%", anchorX:"70%" },
+            "桃園市": { count:101, dotX:"65%", dotY:"10%", labelX:"30%", labelY:"6%", anchorX:"32%" },
+            "新竹縣": { count:130, dotX:"62%", dotY:"16%", labelX:"25%", labelY:"12%", anchorX:"26%" },
+            "新竹市": { count:85, dotX:"54%", dotY:"17%", labelX:"20%", labelY:"18%", anchorX:"26%" },
+            "宜蘭縣": { count:130, dotX:"78%", dotY:"23%", labelX:"95%", labelY:"16%", anchorX:"72%" },
+            "苗栗縣": { count:130, dotX:"50%", dotY:"22%", labelX:"15%", labelY:"24%", anchorX:"25%" },
+            "臺中市": { count:160, dotX:"43%", dotY:"30%", labelX:"8%", labelY:"30%", anchorX:"24%" },
+            "彰化縣": { count:130, dotX:"36%", dotY:"36%", labelX:"7%", labelY:"36%", anchorX:"22%" },
+            "南投縣": { count:130, dotX:"53%", dotY:"40%", labelX:"85%", labelY:"35%", anchorX:"70%" },
+            "雲林縣": { count:160, dotX:"31%", dotY:"43%", labelX:"7%", labelY:"43%", anchorX:"22%" },
+            "嘉義縣": { count:130, dotX:"32%", dotY:"50%", labelX:"12%", labelY:"55%", anchorX:"24%" },
+            "嘉義市": { count:160, dotX:"36%", dotY:"49%", labelX:"45%", labelY:"45%", anchorX:"22%" },
+            "臺南市": { count:160, dotX:"28%", dotY:"60%", labelX:"10%", labelY:"61%", anchorX:"23%" },
+            "高雄市": { count:145, dotX:"33%", dotY:"71%", labelX:"13%", labelY:"75%", anchorX:"28%" },
+            "屏東縣": { count:48, dotX:"42%", dotY:"75%", labelX:"35%", labelY:"90%", anchorX:"39%" },
+            "花蓮縣": { count:130, dotX:"66%", dotY:"50%", labelX:"90%", labelY:"50%", anchorX:"72%" },
+            "臺東縣": { count:130, dotX:"56%", dotY:"70%", labelX:"65%", labelY:"87%", anchorX:"70%" },
+            "澎湖縣": { count:8, dotX:"10%", dotY:"50%", labelX:"-1%", labelY:"50%", anchorX:"7%" }
         };
 
+        // 1. 智能向量拉線渲染 (含 Hover 連動特效)
+        document.addEventListener('DOMContentLoaded', () => {
+            const pinsContainer = document.getElementById('map-pins-container');
+            const svgOverlay = document.getElementById('map-svg-overlay');
+
+            for (let county in pharmacyData) {
+                const data = pharmacyData[county];
+
+                // A. 繪製精緻小圓點
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', data.dotX);
+                circle.setAttribute('cy', data.dotY);
+                circle.setAttribute('r', '3.5');
+                circle.setAttribute('fill', 'var(--primary-dark)');
+                circle.style.transition = 'all 0.3s cubic-bezier(0.25, 1, 0.5, 1)'; 
+                svgOverlay.appendChild(circle);
+
+                // B. 繪製指向文字盒的虛線
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', data.dotX);
+                line.setAttribute('y1', data.dotY);
+                line.setAttribute('x2', data.labelX);
+                line.setAttribute('y2', data.labelY);
+                line.setAttribute('stroke', '#a2b9b9'); 
+                line.setAttribute('stroke-width', '1.2');
+                line.setAttribute('stroke-dasharray', '3,3');
+                line.style.transition = 'all 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+                svgOverlay.appendChild(line);
+
+                // C. 生成文字盒
+                const pin = document.createElement('div');
+                pin.className = 'map-pin';
+                pin.style.top = data.labelY;
+                pin.style.left = data.labelX;
+
+                const displayCount = typeof data.count === 'number' 
+                    ? `${data.count}<span class="unit-text">家</span>` 
+                    : data.count;
+
+                pin.innerHTML = `
+                    <span class="county-name">${county}</span>
+                    <span class="county-num">${displayCount}</span>
+                `;
+                
+                // D. 核心互動：加入滑鼠懸停 (Hover) 連動特效
+                pin.addEventListener('mouseenter', () => {
+                    // 圓點放大並變色 (變萊姆綠)
+                    circle.setAttribute('r', '6');
+                    circle.setAttribute('fill', 'var(--primary-light)');
+                    
+                    // 連線變粗、變色，並從虛線轉為實線
+                    line.setAttribute('stroke', 'var(--primary-light)'); 
+                    line.setAttribute('stroke-width', '2.5');
+                    line.setAttribute('stroke-dasharray', 'none'); 
+                });
+
+                // E. 滑鼠移開時恢復原狀
+                pin.addEventListener('mouseleave', () => {
+                    // 圓點恢復原狀
+                    circle.setAttribute('r', '3.5');
+                    circle.setAttribute('fill', 'var(--primary-dark)');
+                    
+                    // 連線恢復原狀
+                    line.setAttribute('stroke', '#a2b9b9'); 
+                    line.setAttribute('stroke-width', '1.2');
+                    line.setAttribute('stroke-dasharray', '3,3'); 
+                });
+
+                pinsContainer.appendChild(pin);
+            }
+        });
+
+        // ==========================================
+        // 滾動與大字跳表動態效果
+        // ==========================================
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.2 };
         const scrollObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    
                     if (entry.target.id === 'stats-section') {
-                        runNumberCounter();
+                        runNumberCounter(); 
                     }
                     observer.unobserve(entry.target);
                 }
@@ -572,13 +731,12 @@
             if(counterElement.getAttribute('data-animated') === 'true') return;
             counterElement.setAttribute('data-animated', 'true');
             
-            const targetNumber = 1300;
-            const animationDuration = 1800; 
+            const targetNumber = 1307;
+            const animationDuration = 2000; 
             const startTime = performance.now();
 
             function updateNumber(currentTime) {
                 const elapsedTime = currentTime - startTime;
-                
                 if (elapsedTime < animationDuration) {
                     const progress = elapsedTime / animationDuration;
                     const easeProgress = progress * (2 - progress);
