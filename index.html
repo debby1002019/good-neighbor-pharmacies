@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>好鄰居藥業聯盟 Good Neighbor Pharmacies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* 基礎設定與品牌配色 */
         :root {
@@ -131,6 +132,163 @@
         .is-visible .highlight-marker {
             background-size: 100% 40%;
             transition-delay: 0.4s; 
+        }
+
+        /* 🚀 申請流程區塊 CSS */
+        .process-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            position: relative;
+            margin-top: 60px; 
+            margin-bottom: 50px; 
+            gap: 25px; 
+        }
+        
+        .process-step {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 流程步驟間的綠色箭頭 */
+        .process-step:not(:last-child)::after {
+            content: '\f061'; 
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-light);
+            font-size: 1.6em;
+            z-index: 2;
+        }
+
+        .process-card {
+            background: white;
+            padding: 45px 15px 25px 15px; 
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            height: 100%;
+            box-sizing: border-box;
+            border-bottom: 6px solid #ccc; 
+            position: relative; 
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -25px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-dark);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6em;
+            font-weight: bold;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 5;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 還原各步驟主題色 */
+        /* Step 1: 萊姆綠 */
+        .process-step:nth-child(1) .process-card { border-bottom-color: var(--primary-light); }
+        .process-step:nth-child(1) .step-number { background-color: var(--primary-light); }
+        /* Step 2: LINE 綠 */
+        .process-step:nth-child(2) .process-card { border-bottom-color: #06c755; }
+        .process-step:nth-child(2) .step-number { background-color: #06c755; }
+        /* Step 3: 深孔雀綠 */
+        .process-step:nth-child(3) .process-card { border-bottom-color: var(--primary-dark); }
+        .process-step:nth-child(3) .step-number { background-color: var(--primary-dark); }
+        /* Step 4: 藍色 */
+        .process-step:nth-child(4) .process-card { border-bottom-color: #2b7bc4; }
+        .process-step:nth-child(4) .step-number { background-color: #2b7bc4; }
+
+        .process-card i {
+            font-size: 2.8em;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            opacity: 0.85;
+        }
+        .process-step:nth-child(2) .process-card i { color: #06c755; opacity: 1; }
+
+        .process-card h3 {
+            font-size: 1.15em;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+        }
+        .process-card p {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+            flex-grow: 1; 
+        }
+        
+        .line-id-tag {
+            display: inline-block;
+            background: white;
+            color: var(--primary-dark);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 8px;
+            border: 1.5px solid var(--primary-dark);
+            font-size: 0.9em;
+        }
+
+        /* 卡片懸停互動感 */
+        .process-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        .process-card:hover .step-number {
+            transform: translateX(-50%) scale(1.15);
+        }
+
+        /* 🔔 備註提示框 */
+        .process-remark-wrapper {
+            text-align: center;
+            clear: both;
+        }
+        .process-remark {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f0f8f0;
+            padding: 10px 30px 10px 15px;
+            border-radius: 50px;
+            box-shadow: 0 2px 8px rgba(0, 107, 107, 0.05);
+            gap: 12px;
+        }
+        .process-remark .bell-icon {
+            background-color: var(--primary-light);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1em;
+            flex-shrink: 0;
+        }
+        .process-remark p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95em;
+            font-weight: bold;
         }
 
         /* 供應產品範疇徽章排版 */
@@ -261,7 +419,6 @@
             align-items: center;
         }
         
-        /* 隱形畫框：確保地圖跟標籤完美重合的核心 */
         .map-inner-container {
             position: relative; 
             display: inline-block; 
@@ -275,7 +432,6 @@
             display: block;
         }
 
-        /* 拉線出去後的數據標籤樣式 */
         .map-pin {
             position: absolute;
             transform: translate(-50%, -50%); 
@@ -291,11 +447,9 @@
             z-index: 5;
             transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
-            /* 🚀 核心修正：將滑鼠事件權限重新開啟，允許穿透上層的透明容器 */
             pointer-events: auto;
         }
         
-        /* 懸停時置頂：設定超高 z-index 並放大 */
         .map-pin:hover {
             z-index: 999 !important;
             transform: translate(-50%, -55%) scale(1.15);
@@ -345,6 +499,20 @@
             border-left: 5px solid var(--primary-dark);
             margin: 20px 0;
             border-radius: 0 5px 5px 0;
+        }
+
+        /* 車隊照片專屬樣式 */
+        .fleet-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; 
+            margin-top: 15px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+            border: 2px solid white; 
+            transition: transform 0.3s ease; 
+        }
+        .fleet-img:hover {
+            transform: scale(1.02); 
         }
 
         /* FAQ 常見問題 */
@@ -436,6 +604,24 @@
             }
             .mission-wrapper {
                 padding: 30px 25px;
+            }
+            /* 流程圖 RWD */
+            .process-container {
+                flex-direction: column;
+                gap: 50px; 
+            }
+            .process-step:not(:last-child)::after {
+                content: '\f063'; 
+                right: 50%;
+                top: auto;
+                bottom: -35px;
+                transform: translateX(50%);
+            }
+            .process-remark {
+                flex-direction: column;
+                border-radius: 15px;
+                padding: 20px;
+                text-align: center;
             }
         }
     </style>
@@ -547,9 +733,7 @@
             <div class="image-map-wrapper">
                 <div class="map-inner-container">
                     <img src="台灣地圖.png" alt="台灣各縣市藥局分佈地圖" class="taiwan-map-img">
-                    
                     <svg id="map-svg-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index: 1;"></svg>
-                    
                     <div id="map-pins-container" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index: 2;"></div>
                 </div>
             </div>
@@ -560,8 +744,58 @@
                 <div class="region-highlight">
                     <strong>📍 北北基桃核心密集優勢</strong><br>
                     我們在北部地區深耕成效斐然（新北市 220 家、台北市 208 家、桃園市 101 家、基隆市 33 家），搭配我們的<strong>自有專屬物流車隊</strong>，能提供最即時、彈性且高頻率的配送服務，滿足獨立藥局的每日營運調度。
+                    <img src="躍獅車隊.png" alt="躍獅自有專屬物流車隊" class="fleet-img">
                 </div>
-                <p>不論您身在何處，加入好鄰居，即可共享龐大規模帶來的強大採購議價力與穩定的體系貨源。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section animate-scroll">
+        <h2 class="section-title">加入流程 簡單四步驟</h2>
+        <p style="text-align: center; color: #666; margin-top: -20px;">免費加入！快速開通！</p>
+        
+        <div class="process-container">
+            <div class="process-step">
+                <div class="process-card">
+                    <div class="step-number">1</div>
+                    <i class="fa-regular fa-clipboard"></i>
+                    <h3>填寫表單申請</h3>
+                    <p>於 Google 表單<br>填寫基本資料<br>提交申請表單</p>
+                </div>
+            </div>
+            
+            <div class="process-step">
+                <div class="process-card">
+                    <div class="step-number">2</div>
+                    <i class="fa-brands fa-line"></i>
+                    <h3>加入官方 LINE</h3>
+                    <p>加入好鄰居藥業聯盟<br>官方 LINE 帳號<br><span class="line-id-tag">ID : @709sthgc</span></p>
+                </div>
+            </div>
+            
+            <div class="process-step">
+                <div class="process-card">
+                    <div class="step-number">3</div>
+                    <i class="fa-solid fa-file-medical"></i>
+                    <h3>回傳相關執照</h3>
+                    <p>透過 LINE 回傳以下文件：<br>• 藥局執照 / 開業執照<br>• 管制藥品登記證</p>
+                </div>
+            </div>
+            
+            <div class="process-step">
+                <div class="process-card">
+                    <div class="step-number">4</div>
+                    <i class="fa-regular fa-envelope-open"></i>
+                    <h3>等待審核開通</h3>
+                    <p>審核完成後將透過信箱<br>發送帳號啟用通知</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="process-remark-wrapper">
+            <div class="process-remark">
+                <div class="bell-icon"><i class="fa-solid fa-bell"></i></div>
+                <p>實際審核時間可能因資料完整性及審核狀況而有所調整，感謝您的耐心等候！</p>
             </div>
         </div>
     </section>
@@ -569,7 +803,6 @@
     <section class="section" style="background-color: var(--bg-light); max-width: 100%;">
         <div class="faq-container">
             <h2 class="section-title animate-scroll">常見問題 FAQ</h2>
-            
             <div class="faq-item animate-scroll">
                 <p class="faq-question"><span>Q1.</span> 加入聯盟有門檻及費用嗎？</p>
                 <div class="faq-answer">
@@ -577,29 +810,23 @@
                     只需提供您的「開業執照」與「管制藥品登記證」等基本審核資料，即可快速開通專屬帳號。
                 </div>
             </div>
-
             <div class="faq-item animate-scroll">
                 <p class="faq-question"><span>Q2.</span> 每筆訂單有最低出貨金額限制嗎？</p>
                 <div class="faq-answer">
                     <ul>
                         <li><strong>1️⃣ 訂單無最低出貨金額：</strong> 彈性配合您的庫存需求，小額叫貨也沒問題。</li>
-                        <li><strong>2️⃣ 滿額免運：</strong> 單筆訂單滿 <strong>3,000元</strong> 即可享有免運費優惠（常溫與冰品需分開計算）。</li>
-                        <li><strong>3️⃣ 快速到貨：</strong> 早上 10 點前結單，當日出貨，隔天到貨；早上 10 點後結單，隔天出貨，后天到貨。<br>
-                        <span style="font-size: 0.9em; color: #888;">*註：偏遠地區或特殊假期之到貨時間，需依合作物流公司實際安排為準。</span></li>
+                        <li><strong>2️⃣ 滿額免運：</strong> 單筆訂單滿 <strong>3,000元</strong> 即可享有免運費優惠。</li>
                     </ul>
                 </div>
             </div>
-            
         </div>
     </section>
 
     <section id="contact" class="section">
         <div style="max-width: 1000px; margin: 0 auto;">
             <h2 class="section-title animate-scroll">準備好擁有更強大的後盾了嗎？</h2>
-            
             <div class="line-contact animate-scroll">
-                <p style="font-size: 1.2em; font-weight: bold; color: var(--primary-dark); margin-bottom: 15px;">👇 掃描或點擊下方圖片，立即加入 LINE 官方帳號諮詢 👇</p>
-                <a href="https://line.me/R/ti/p/您的LINEID" target="_blank" class="line-pulse-btn">
+                <a href="https://line.me/R/ti/p/@709sthgc" target="_blank" class="line-pulse-btn">
                     <img src="image_c9316e.png" alt="加入好鄰居藥業聯盟 LINE 官方帳號">
                 </a>
             </div>
@@ -612,46 +839,42 @@
 
     <script>
         const pharmacyData = {
-           "基隆市": { count:33, dotX:"82%", dotY:"8%", labelX:"82%", labelY:"2%", anchorX:"72%" },
-            "台北市": { count:208, dotX:"36%", dotY:"9%", labelX:"40%", labelY:"0%", anchorX:"34%" },
-            "新北市": { count:220, dotX:"80%", dotY:"13%", labelX:"100%", labelY:"10%", anchorX:"70%" },
-            "桃園市": { count:101, dotX:"65%", dotY:"10%", labelX:"30%", labelY:"6%", anchorX:"32%" },
-            "新竹縣": { count:22, dotX:"62%", dotY:"16%", labelX:"25%", labelY:"12%", anchorX:"26%" },
-            "新竹市": { count:24, dotX:"54%", dotY:"17%", labelX:"20%", labelY:"18%", anchorX:"26%" },
-            "宜蘭縣": { count:34, dotX:"78%", dotY:"23%", labelX:"95%", labelY:"16%", anchorX:"72%" },
-            "苗栗縣": { count:19, dotX:"50%", dotY:"22%", labelX:"15%", labelY:"24%", anchorX:"25%" },
-            "臺中市": { count:164, dotX:"43%", dotY:"30%", labelX:"8%", labelY:"30%", anchorX:"24%" },
-            "彰化縣": { count:73, dotX:"36%", dotY:"36%", labelX:"7%", labelY:"36%", anchorX:"22%" },
-            "南投縣": { count:33, dotX:"53%", dotY:"40%", labelX:"85%", labelY:"35%", anchorX:"70%" },
-            "雲林縣": { count:40, dotX:"31%", dotY:"43%", labelX:"7%", labelY:"43%", anchorX:"22%" },
-            "嘉義縣": { count:32, dotX:"32%", dotY:"50%", labelX:"12%", labelY:"55%", anchorX:"24%" },
-            "嘉義市": { count:21, dotX:"36%", dotY:"49%", labelX:"45%", labelY:"45%", anchorX:"22%" },
-            "臺南市": { count:84, dotX:"28%", dotY:"60%", labelX:"10%", labelY:"61%", anchorX:"23%" },
-            "高雄市": { count:115, dotX:"33%", dotY:"71%", labelX:"13%", labelY:"75%", anchorX:"28%" },
-            "屏東縣": { count:41, dotX:"42%", dotY:"75%", labelX:"35%", labelY:"90%", anchorX:"39%" },
-            "花蓮縣": { count:32, dotX:"66%", dotY:"50%", labelX:"90%", labelY:"50%", anchorX:"72%" },
-            "臺東縣": { count:7, dotX:"56%", dotY:"70%", labelX:"65%", labelY:"87%", anchorX:"70%" },
-            "澎湖縣": { count:4, dotX:"10%", dotY:"50%", labelX:"-1%", labelY:"50%", anchorX:"7%" }
+            "基隆市": { count:33, dotX:"82%", dotY:"8%", labelX:"82%", labelY:"2%" },
+            "台北市": { count:208, dotX:"36%", dotY:"9%", labelX:"40%", labelY:"0%" },
+            "新北市": { count:220, dotX:"80%", dotY:"13%", labelX:"100%", labelY:"10%" },
+            "桃園市": { count:101, dotX:"65%", dotY:"10%", labelX:"30%", labelY:"6%" },
+            "新竹縣": { count:130, dotX:"62%", dotY:"16%", labelX:"25%", labelY:"12%" },
+            "新竹市": { count:85, dotX:"54%", dotY:"17%", labelX:"20%", labelY:"18%" },
+            "宜蘭縣": { count:130, dotX:"78%", dotY:"23%", labelX:"95%", labelY:"16%" },
+            "苗栗縣": { count:130, dotX:"50%", dotY:"22%", labelX:"15%", labelY:"24%" },
+            "臺中市": { count:160, dotX:"43%", dotY:"30%", labelX:"8%", labelY:"30%" },
+            "彰化縣": { count:130, dotX:"36%", dotY:"36%", labelX:"7%", labelY:"36%" },
+            "南投縣": { count:130, dotX:"53%", dotY:"40%", labelX:"85%", labelY:"35%" },
+            "雲林縣": { count:160, dotX:"31%", dotY:"43%", labelX:"7%", labelY:"43%" },
+            "嘉義縣": { count:130, dotX:"32%", dotY:"50%", labelX:"12%", labelY:"55%" },
+            "嘉義市": { count:160, dotX:"36%", dotY:"49%", labelX:"45%", labelY:"45%" },
+            "臺南市": { count:160, dotX:"28%", dotY:"60%", labelX:"10%", labelY:"61%" },
+            "高雄市": { count:145, dotX:"33%", dotY:"71%", labelX:"13%", labelY:"75%" },
+            "屏東縣": { count:48, dotX:"42%", dotY:"75%", labelX:"35%", labelY:"90%" },
+            "花蓮縣": { count:130, dotX:"66%", dotY:"50%", labelX:"90%", labelY:"50%" },
+            "臺東縣": { count:130, dotX:"56%", dotY:"70%", labelX:"65%", labelY:"87%" },
+            "澎湖縣": { count:8, dotX:"10%", dotY:"50%", labelX:"-1%", labelY:"50%" }
         };
 
-        // 1. 智能向量拉線渲染 (含 Hover 連動特效)
         document.addEventListener('DOMContentLoaded', () => {
             const pinsContainer = document.getElementById('map-pins-container');
             const svgOverlay = document.getElementById('map-svg-overlay');
 
             for (let county in pharmacyData) {
                 const data = pharmacyData[county];
-
-                // A. 繪製精緻小圓點
                 const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                 circle.setAttribute('cx', data.dotX);
                 circle.setAttribute('cy', data.dotY);
                 circle.setAttribute('r', '3.5');
                 circle.setAttribute('fill', 'var(--primary-dark)');
-                circle.style.transition = 'all 0.3s cubic-bezier(0.25, 1, 0.5, 1)'; 
+                circle.style.transition = 'all 0.3s ease';
                 svgOverlay.appendChild(circle);
 
-                // B. 繪製指向文字盒的虛線
                 const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
                 line.setAttribute('x1', data.dotX);
                 line.setAttribute('y1', data.dotY);
@@ -660,95 +883,60 @@
                 line.setAttribute('stroke', '#a2b9b9'); 
                 line.setAttribute('stroke-width', '1.2');
                 line.setAttribute('stroke-dasharray', '3,3');
-                line.style.transition = 'all 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+                line.style.transition = 'all 0.3s ease';
                 svgOverlay.appendChild(line);
 
-                // C. 生成文字盒
                 const pin = document.createElement('div');
                 pin.className = 'map-pin';
                 pin.style.top = data.labelY;
                 pin.style.left = data.labelX;
-
-                const displayCount = typeof data.count === 'number' 
-                    ? `${data.count}<span class="unit-text">家</span>` 
-                    : data.count;
-
-                pin.innerHTML = `
-                    <span class="county-name">${county}</span>
-                    <span class="county-num">${displayCount}</span>
-                `;
+                const displayCount = `${data.count}<span class="unit-text">家</span>`;
+                pin.innerHTML = `<span class="county-name">${county}</span><span class="county-num">${displayCount}</span>`;
                 
-                // D. 核心互動：加入滑鼠懸停 (Hover) 連動特效
                 pin.addEventListener('mouseenter', () => {
-                    // 圓點放大並變色 (變萊姆綠)
                     circle.setAttribute('r', '6');
                     circle.setAttribute('fill', 'var(--primary-light)');
-                    
-                    // 連線變粗、變色，並從虛線轉為實線
                     line.setAttribute('stroke', 'var(--primary-light)'); 
                     line.setAttribute('stroke-width', '2.5');
                     line.setAttribute('stroke-dasharray', 'none'); 
                 });
-
-                // E. 滑鼠移開時恢復原狀
                 pin.addEventListener('mouseleave', () => {
-                    // 圓點恢復原狀
                     circle.setAttribute('r', '3.5');
                     circle.setAttribute('fill', 'var(--primary-dark)');
-                    
-                    // 連線恢復原狀
                     line.setAttribute('stroke', '#a2b9b9'); 
                     line.setAttribute('stroke-width', '1.2');
                     line.setAttribute('stroke-dasharray', '3,3'); 
                 });
-
                 pinsContainer.appendChild(pin);
             }
         });
 
-        // ==========================================
-        // 滾動與大字跳表動態效果
-        // ==========================================
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.2 };
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
+        const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    if (entry.target.id === 'stats-section') {
-                        runNumberCounter(); 
-                    }
-                    observer.unobserve(entry.target);
+                    if (entry.target.id === 'stats-section') runNumberCounter();
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.animate-scroll').forEach(element => {
-            scrollObserver.observe(element);
-        });
+        document.querySelectorAll('.animate-scroll').forEach(el => scrollObserver.observe(el));
 
         function runNumberCounter() {
             const counterElement = document.getElementById('member-counter');
-            if(counterElement.getAttribute('data-animated') === 'true') return;
-            counterElement.setAttribute('data-animated', 'true');
-            
-            const targetNumber = 1307;
-            const animationDuration = 2000; 
-            const startTime = performance.now();
-
-            function updateNumber(currentTime) {
-                const elapsedTime = currentTime - startTime;
-                if (elapsedTime < animationDuration) {
-                    const progress = elapsedTime / animationDuration;
-                    const easeProgress = progress * (2 - progress);
-                    const currentCount = Math.floor(easeProgress * targetNumber);
-                    
-                    counterElement.textContent = currentCount.toLocaleString();
-                    requestAnimationFrame(updateNumber);
-                } else {
-                    counterElement.textContent = targetNumber.toLocaleString(); 
+            if(counterElement.dataset.animated === 'true') return;
+            counterElement.dataset.animated = 'true';
+            let target = 1307;
+            let current = 0;
+            let step = target / 100;
+            let interval = setInterval(() => {
+                current += step;
+                if(current >= target) {
+                    current = target;
+                    clearInterval(interval);
                 }
-            }
-            requestAnimationFrame(updateNumber);
+                counterElement.textContent = Math.floor(current).toLocaleString();
+            }, 20);
         }
     </script>
 </body>
