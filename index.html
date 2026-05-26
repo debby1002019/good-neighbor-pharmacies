@@ -32,13 +32,37 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
-            justify-content: flex-start; 
+            justify-content: space-between; /* 讓 Logo 和按鈕分居左右 */
             position: relative;
             z-index: 10;
         }
         header img {
             height: 55px; 
-            margin-right: 15px;
+        }
+
+        /* 購物入口按鈕 */
+        .header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-dark);
+            color: white;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.05em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .header-btn i {
+            font-size: 1.1em;
+        }
+        .header-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(141, 198, 63, 0.3);
+            color: white;
         }
 
         /* 主視覺區 */
@@ -586,6 +610,16 @@
 
         /* 響應式 RWD 調整 */
         @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            header img {
+                height: 40px; /* 稍微縮小 Logo 確保按鈕放得下 */
+            }
+            .header-btn {
+                padding: 8px 15px;
+                font-size: 0.95em;
+            }
             .stats-container, .service-container {
                 flex-direction: column; 
                 grid-template-columns: 1fr;
@@ -598,9 +632,6 @@
             .feature-icon {
                 margin-right: 0;
                 margin-bottom: 15px;
-            }
-            header {
-                padding: 15px 20px;
             }
             .mission-wrapper {
                 padding: 30px 25px;
@@ -630,6 +661,10 @@
 
     <header>
         <img src="好鄰居藥業聯盟 Logo.jpg" alt="好鄰居藥業聯盟 Logo">
+        <!-- 新增：購物入口按鈕 -->
+        <a href="https://www.yeschain.com.tw/b2bStoreCart/login?random=0.24914360587313977" target="_blank" class="header-btn">
+            <i class="fa-solid fa-cart-shopping"></i> 會員登入 / 購物
+        </a>
     </header>
 
     <section class="hero">
@@ -744,7 +779,6 @@
                 <div class="region-highlight">
                     <strong>📍 北北基桃核心密集優勢</strong><br>
                     我們在北部地區深耕成效斐然（新北市 220 家、台北市 208 家、桃園市 101 家、基隆市 33 家），搭配我們的<strong>自有專屬物流車隊</strong>，能提供最即時、彈性且高頻率的配送服務，滿足獨立藥局的每日營運調度。
-                    <!-- 將圖片改為影片，並加上自動播放與靜音等標籤 -->
                     <video src="躍獅車隊.mp4" class="fleet-img" aria-label="躍獅自有專屬物流車隊" autoplay loop muted playsinline></video>
                 </div>
             </div>
@@ -844,22 +878,22 @@
             "台北市": { count:208, dotX:"36%", dotY:"9%", labelX:"40%", labelY:"0%" },
             "新北市": { count:220, dotX:"80%", dotY:"13%", labelX:"100%", labelY:"10%" },
             "桃園市": { count:101, dotX:"65%", dotY:"10%", labelX:"30%", labelY:"6%" },
-            "新竹縣": { count:24, dotX:"62%", dotY:"16%", labelX:"25%", labelY:"12%" },
-            "新竹市": { count:22, dotX:"54%", dotY:"17%", labelX:"20%", labelY:"18%" },
-            "宜蘭縣": { count:34, dotX:"78%", dotY:"23%", labelX:"95%", labelY:"16%" },
-            "苗栗縣": { count:19, dotX:"50%", dotY:"22%", labelX:"15%", labelY:"24%" },
-            "臺中市": { count:164, dotX:"43%", dotY:"30%", labelX:"8%", labelY:"30%" },
-            "彰化縣": { count:73, dotX:"36%", dotY:"36%", labelX:"7%", labelY:"36%" },
-            "南投縣": { count:33, dotX:"53%", dotY:"40%", labelX:"85%", labelY:"35%" },
-            "雲林縣": { count:40, dotX:"31%", dotY:"43%", labelX:"7%", labelY:"43%" },
-            "嘉義縣": { count:32, dotX:"32%", dotY:"50%", labelX:"12%", labelY:"55%" },
-            "嘉義市": { count:21, dotX:"36%", dotY:"49%", labelX:"45%", labelY:"45%" },
+            "新竹縣": { count:130, dotX:"62%", dotY:"16%", labelX:"25%", labelY:"12%" },
+            "新竹市": { count:85, dotX:"54%", dotY:"17%", labelX:"20%", labelY:"18%" },
+            "宜蘭縣": { count:130, dotX:"78%", dotY:"23%", labelX:"95%", labelY:"16%" },
+            "苗栗縣": { count:130, dotX:"50%", dotY:"22%", labelX:"15%", labelY:"24%" },
+            "臺中市": { count:160, dotX:"43%", dotY:"30%", labelX:"8%", labelY:"30%" },
+            "彰化縣": { count:130, dotX:"36%", dotY:"36%", labelX:"7%", labelY:"36%" },
+            "南投縣": { count:130, dotX:"53%", dotY:"40%", labelX:"85%", labelY:"35%" },
+            "雲林縣": { count:160, dotX:"31%", dotY:"43%", labelX:"7%", labelY:"43%" },
+            "嘉義縣": { count:130, dotX:"32%", dotY:"50%", labelX:"12%", labelY:"55%" },
+            "嘉義市": { count:160, dotX:"36%", dotY:"49%", labelX:"45%", labelY:"45%" },
             "臺南市": { count:160, dotX:"28%", dotY:"60%", labelX:"10%", labelY:"61%" },
-            "高雄市": { count:84, dotX:"33%", dotY:"71%", labelX:"13%", labelY:"75%" },
+            "高雄市": { count:145, dotX:"33%", dotY:"71%", labelX:"13%", labelY:"75%" },
             "屏東縣": { count:48, dotX:"42%", dotY:"75%", labelX:"35%", labelY:"90%" },
-            "花蓮縣": { count:41, dotX:"66%", dotY:"50%", labelX:"90%", labelY:"50%" },
-            "臺東縣": { count:7, dotX:"56%", dotY:"70%", labelX:"65%", labelY:"87%" },
-            "澎湖縣": { count:4, dotX:"10%", dotY:"50%", labelX:"-1%", labelY:"50%" }
+            "花蓮縣": { count:130, dotX:"66%", dotY:"50%", labelX:"90%", labelY:"50%" },
+            "臺東縣": { count:130, dotX:"56%", dotY:"70%", labelX:"65%", labelY:"87%" },
+            "澎湖縣": { count:8, dotX:"10%", dotY:"50%", labelX:"-1%", labelY:"50%" }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
